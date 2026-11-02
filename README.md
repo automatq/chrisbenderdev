@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# chrisbenderdev
 
-## Getting Started
+Personal portfolio site, built on [Magic Portfolio](https://github.com/once-ui-system/magic-portfolio) (Once UI + Next.js). It has an MDX-based content system for projects and blog posts, an about / CV page and a gallery.
 
-First, run the development server:
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Where things live
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| What | Where |
+|---|---|
+| Site config (domain, routes, theme, fonts, effects) | `src/resources/once-ui.config.ts` |
+| Content (person, social links, page copy) | `src/resources/content.tsx` |
+| Blog posts | `src/app/blog/posts/*.mdx` |
+| Projects | `src/app/work/projects/*.mdx` |
+| Images | `public/images/` |
+| Once UI conventions for agents | `.agents` |
 
-## Learn More
+Set `baseURL` in `once-ui.config.ts` to the production domain. It is used for SEO meta tags, Open Graph images and the sitemap.
 
-To learn more about Next.js, take a look at the following resources:
+## Password-protected pages
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+List the paths in `protectedRoutes` in `src/resources/once-ui.config.ts`, then set these environment variables (see `.env.example`):
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Variable | |
+|---|---|
+| `PAGE_ACCESS_PASSWORD` | The password visitors enter. |
+| `PAGE_ACCESS_SECRET` | A long random string (for example `openssl rand -base64 32`) that signs the access cookie. Recommended; without it a key derived from the password is used, so changing the password signs everyone out. |
 
-## Deploy on Vercel
+Protection runs on the server: `src/proxy.ts` and the blog and work pages check the signed, HttpOnly cookie that `/api/authenticate` sets (valid for one hour), so a protected page's content is never sent without the password.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Scripts
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Command | |
+|---|---|
+| `pnpm dev` | Dev server |
+| `pnpm build` | Production build |
+| `pnpm start` | Serve the production build |
+| `pnpm lint` | ESLint |
+
+## Upstream
+
+Template docs: [docs.once-ui.com](https://docs.once-ui.com/docs/magic-portfolio/quick-start). Imported from magic-portfolio v2.3.0 (commit `bee2f1b`). The template is MIT licensed; see `LICENSE`.
