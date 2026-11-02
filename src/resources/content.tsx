@@ -66,14 +66,14 @@ const home: Home = {
     display: true,
     title: (
       <Row gap="12" vertical="center">
-        <strong className="ml-4">Once UI</strong>{" "}
+        <strong className="ml-4">Building Blocks</strong>{" "}
         <Line background="brand-alpha-strong" vert height="20" />
         <Text marginRight="4" onBackground="brand-medium">
           Featured work
         </Text>
       </Row>
     ),
-    href: "/work/building-once-ui-a-customizable-design-system",
+    href: "/work/building-blocks-nursery-school",
   },
   subline: (
     <>
@@ -309,18 +309,13 @@ const gallery: Gallery = {
       aspectRatio: "1440 / 904",
     },
     {
-      src: "/images/projects/project-01/cover-01.jpg",
-      alt: "Once UI design system – component library overview",
-      orientation: "horizontal",
-    },
-    {
       src: "/images/gallery/vertical-1.jpg",
       alt: "image",
       orientation: "vertical",
     },
     {
-      src: "/images/projects/project-01/cover-02.jpg",
-      alt: "Figma to code pipeline – automated design handover",
+      src: "/images/projects/zoltanbuilds/cover-01.jpg",
+      alt: "ZoltanBuilds – hero and three-step quote flow",
       orientation: "horizontal",
     },
     {
@@ -329,8 +324,8 @@ const gallery: Gallery = {
       orientation: "vertical",
     },
     {
-      src: "/images/projects/project-01/cover-03.jpg",
-      alt: "Once UI design system – theming and customization",
+      src: "/images/projects/building-blocks/cover-01.jpg",
+      alt: "Building Blocks Nursery School – home page",
       orientation: "horizontal",
     },
     {
@@ -339,8 +334,8 @@ const gallery: Gallery = {
       orientation: "vertical",
     },
     {
-      src: "/images/projects/project-01/cover-04.jpg",
-      alt: "Simple portfolio builder – project showcase",
+      src: "/images/projects/zoltanbuilds/image-02.jpg",
+      alt: "ZoltanBuilds – documented 3-season room project",
       orientation: "horizontal",
     },
     {
@@ -349,8 +344,8 @@ const gallery: Gallery = {
       orientation: "vertical",
     },
     {
-      src: "/images/projects/project-01/image-03.jpg",
-      alt: "Figma to code pipeline – design tokens in the codebase",
+      src: "/images/projects/building-blocks/image-01.jpg",
+      alt: "Building Blocks Nursery School – programs page",
       orientation: "horizontal",
     },
     {
