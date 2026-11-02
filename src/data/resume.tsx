@@ -11,10 +11,15 @@ import {
   SiAnthropic,
   SiClaudecode,
   SiCloudflare,
+  SiCplusplus,
   SiDotnet,
   SiExpress,
   SiFramer,
+  SiGo,
   SiGreensock,
+  SiKubernetes,
+  SiOpenjdk,
+  SiPython,
   SiSquare,
   SiSupabase,
   SiSwift,
@@ -72,7 +77,12 @@ const skills: Skill[] = [
   { name: "Swift", icon: SiSwift },
   { name: "C#", icon: Csharp },
   { name: ".NET", icon: SiDotnet },
+  { name: "Java", icon: SiOpenjdk },
+  { name: "Python", icon: SiPython },
+  { name: "Go", icon: SiGo },
+  { name: "C++", icon: SiCplusplus },
   { name: "Docker", icon: Docker },
+  { name: "Kubernetes", icon: SiKubernetes },
 ];
 
 export const DATA = {
