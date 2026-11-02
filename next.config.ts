@@ -1,27 +1,22 @@
 import type { NextConfig } from "next";
-import mdx from "@next/mdx";
-
-const withMDX = mdx({
-  extension: /\.mdx?$/,
-  options: {},
-});
+import { withContentCollections } from "@content-collections/next";
 
 const nextConfig: NextConfig = {
-  pageExtensions: ["ts", "tsx", "md", "mdx"],
-  transpilePackages: ["next-mdx-remote"],
-  images: {
-    remotePatterns: [
+  reactStrictMode: true,
+  async headers() {
+    return [
       {
-        protocol: "https",
-        hostname: "www.google.com",
-        pathname: "**",
+        source: "/:path*",
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "X-Frame-Options", value: "DENY" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+        ],
       },
-    ],
-  },
-  sassOptions: {
-    compiler: "modern",
-    silenceDeprecations: ["legacy-js-api"],
+    ];
   },
 };
 
-export default withMDX(nextConfig);
+// withContentCollections must be the outermost plugin
+export default withContentCollections(nextConfig);

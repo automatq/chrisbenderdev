@@ -1,0 +1,2 @@
+# Local-only artifacts (Conductor workspace context, screenshots); not read from .git/info/exclude by the Vercel CLI.
+.context

@@ -1,168 +1,193 @@
+import { allPosts } from "content-collections";
+import { formatDate } from "@/lib/utils";
+import { DATA } from "@/data/resume";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import "katex/dist/katex.min.css";
-import { CustomMDX, ScrollToHash } from "@/components";
-import {
-  Meta,
-  Schema,
-  Column,
-  Heading,
-  HeadingNav,
-  Row,
-  Text,
-  SmartLink,
-  Avatar,
-  Media,
-  Line,
-} from "@once-ui-system/core";
-import { baseURL, about, blog, person } from "@/resources";
-import { formatDate } from "@/utils/formatDate";
-import { getPosts } from "@/utils/utils";
-import { canViewPath } from "@/utils/pageAccessServer";
-import { Metadata } from "next";
-import React from "react";
-import { Posts } from "@/components/blog/Posts";
-import { ShareSection } from "@/components/blog/ShareSection";
+import { MDXContent } from "@content-collections/mdx/react";
+import { mdxComponents } from "@/mdx-components";
+import Link from "next/link";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
-export async function generateStaticParams(): Promise<{ slug: string }[]> {
-  const posts = getPosts(["src", "app", "blog", "posts"]);
-  return posts.map((post) => ({
-    slug: post.slug,
+function getSortedPosts() {
+  return [...allPosts].sort((a, b) => {
+    if (new Date(a.publishedAt) > new Date(b.publishedAt)) {
+      return -1;
+    }
+    return 1;
+  });
+}
+
+export async function generateStaticParams() {
+  return allPosts.map((post) => ({
+    slug: post._meta.path.replace(/\.mdx$/, ""),
   }));
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string | string[] }>;
-}): Promise<Metadata> {
-  const routeParams = await params;
-  const slugPath = Array.isArray(routeParams.slug)
-    ? routeParams.slug.join("/")
-    : routeParams.slug || "";
+  params: Promise<{
+    slug: string;
+  }>;
+}): Promise<Metadata | undefined> {
+  const { slug } = await params;
+  const post = allPosts.find((p) => p._meta.path.replace(/\.mdx$/, "") === slug);
 
-  const posts = getPosts(["src", "app", "blog", "posts"]);
-  const post = posts.find((post) => post.slug === slugPath);
+  if (!post) {
+    return undefined;
+  }
 
-  if (!post) return {};
+  const {
+    title,
+    publishedAt: publishedTime,
+    summary: description,
+    image,
+  } = post;
 
-  const metadata = Meta.generate({
-    title: post.metadata.title,
-    description: post.metadata.summary,
-    baseURL: baseURL,
-    image: post.metadata.image || `/api/og/generate?title=${post.metadata.title}`,
-    path: `${blog.path}/${post.slug}`,
-  });
-  // Meta.generate writes a canonical only alongside language alternates.
-  return { ...metadata, alternates: { canonical: metadata.openGraph.url } };
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      publishedTime,
+      url: `${DATA.url}/blog/${slug}`,
+      ...(image && {
+        images: [
+          {
+            url: `${DATA.url}${image}`,
+          },
+        ],
+      }),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      ...(image && {
+        images: [`${DATA.url}${image}`],
+      }),
+    },
+  };
 }
 
-export default async function Blog({ params }: { params: Promise<{ slug: string | string[] }> }) {
-  const routeParams = await params;
-  const slugPath = Array.isArray(routeParams.slug)
-    ? routeParams.slug.join("/")
-    : routeParams.slug || "";
-
-  const post = getPosts(["src", "app", "blog", "posts"]).find((post) => post.slug === slugPath);
+export default async function Blog({
+  params,
+}: {
+  params: Promise<{
+    slug: string;
+  }>;
+}) {
+  const { slug } = await params;
+  const sortedPosts = getSortedPosts();
+  const currentIndex = sortedPosts.findIndex(
+    (p) => p._meta.path.replace(/\.mdx$/, "") === slug
+  );
+  const post = sortedPosts[currentIndex];
 
   if (!post) {
     notFound();
   }
 
-  // Password-protected: render nothing without access (RouteGuard shows the form).
-  if (!(await canViewPath(`${blog.path}/${post.slug}`))) {
-    return null;
-  }
+  const previousPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
+  const nextPost = currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null;
+
+  const getSlug = (post: (typeof sortedPosts)[0]) =>
+    post._meta.path.replace(/\.mdx$/, "");
+
+  const jsonLdContent = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    datePublished: post.publishedAt,
+    dateModified: post.publishedAt,
+    description: post.summary,
+    image: post.image
+      ? `${DATA.url}${post.image}`
+      : `${DATA.url}/blog/${slug}/opengraph-image`,
+    url: `${DATA.url}/blog/${slug}`,
+    author: {
+      "@type": "Person",
+      name: DATA.name,
+    },
+  }).replace(/</g, "\\u003c");
 
   return (
-    <Row fillWidth>
-      <Row maxWidth={12} m={{ hide: true }} />
-      <Row fillWidth horizontal="center">
-        <Column as="section" maxWidth="m" horizontal="center" gap="l" paddingTop="24">
-          <Schema
-            as="blogPosting"
-            baseURL={baseURL}
-            path={`${blog.path}/${post.slug}`}
-            title={post.metadata.title}
-            description={post.metadata.summary}
-            datePublished={post.metadata.publishedAt}
-            dateModified={post.metadata.publishedAt}
-            image={
-              post.metadata.image ||
-              `/api/og/generate?title=${encodeURIComponent(post.metadata.title)}`
-            }
-            author={{
-              name: person.name,
-              url: `${baseURL}${about.path}`,
-              image: `${baseURL}${person.avatar}`,
-            }}
-          />
-          <Column maxWidth="s" gap="16" horizontal="center" align="center">
-            <SmartLink href="/blog">
-              <Text variant="label-strong-m">Blog</Text>
-            </SmartLink>
-            <Text variant="body-default-xs" onBackground="neutral-weak" marginBottom="12">
-              {post.metadata.publishedAt && formatDate(post.metadata.publishedAt)}
-            </Text>
-            <Heading variant="display-strong-m">{post.metadata.title}</Heading>
-            {post.metadata.subtitle && (
-              <Text
-                variant="body-default-l"
-                onBackground="neutral-weak"
-                align="center"
-                style={{ fontStyle: "italic" }}
-              >
-                {post.metadata.subtitle}
-              </Text>
-            )}
-          </Column>
-          <Row marginBottom="32" horizontal="center">
-            <Row gap="16" vertical="center">
-              <Avatar size="s" src={person.avatar} aria-label={person.name} />
-              <Text variant="label-default-m" onBackground="brand-weak">
-                {person.name}
-              </Text>
-            </Row>
-          </Row>
-          {post.metadata.image && (
-            <Media
-              src={post.metadata.image}
-              alt={post.metadata.title}
-              aspectRatio="16/9"
-              priority
-              sizes="(min-width: 768px) 100vw, 768px"
-              border="neutral-alpha-weak"
-              radius="l"
-              marginTop="12"
-              marginBottom="8"
-            />
+    <section id="blog">
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: jsonLdContent,
+        }}
+      />
+      <div className="flex justify-start gap-4 items-center">
+        <Link href="/blog" className="text-sm text-muted-foreground hover:text-foreground transition-colors border border-border rounded-lg px-2 py-1 inline-flex items-center gap-1 mb-6 group" aria-label="Back to Blog">
+          <ChevronLeft className="size-3 group-hover:-translate-x-px transition-transform" />
+          Back to Blog
+        </Link>
+      </div>
+      <div className="flex flex-col gap-4">
+        <h1 className="title font-semibold text-3xl md:text-4xl tracking-tighter leading-tight">
+          {post.title}
+        </h1>
+        <p className="text-sm text-muted-foreground">
+          {formatDate(post.publishedAt)}
+        </p>
+      </div>
+      <div className="my-6 flex w-full items-center">
+        <div
+          className="flex-1 h-px bg-border"
+          style={{
+            maskImage:
+              "linear-gradient(90deg, transparent, black 8%, black 92%, transparent)",
+            WebkitMaskImage:
+              "linear-gradient(90deg, transparent, black 8%, black 92%, transparent)",
+          }}
+        />
+      </div>
+      <article className="prose max-w-full text-pretty font-sans leading-relaxed text-muted-foreground dark:prose-invert">
+        <MDXContent code={post.mdx} components={mdxComponents} />
+      </article>
+
+      <nav className="mt-12 pt-8 max-w-2xl">
+        <div className="flex flex-col sm:flex-row justify-between gap-4">
+          {previousPost ? (
+            <Link
+              href={`/blog/${getSlug(previousPost)}`}
+              className="group flex-1 flex flex-col gap-1 p-4 rounded-lg border border-border hover:bg-accent/50 transition-colors"
+            >
+              <span className="flex items-center gap-1 text-xs text-muted-foreground">
+                <ChevronLeft className="size-3" />
+                Previous
+              </span>
+              <span className="text-sm font-medium group-hover:text-foreground transition-colors whitespace-normal wrap-break-word">
+                {previousPost.title}
+              </span>
+            </Link>
+          ) : (
+            <div className="hidden sm:block flex-1" />
           )}
-          <Column as="article" maxWidth="s">
-            <CustomMDX source={post.content} />
-          </Column>
 
-          <ShareSection title={post.metadata.title} url={`${baseURL}${blog.path}/${post.slug}`} />
-
-          <Column fillWidth gap="40" horizontal="center" marginTop="40">
-            <Line maxWidth="40" />
-            <Text as="h2" id="recent-posts" variant="heading-strong-xl" marginBottom="24">
-              Recent posts
-            </Text>
-            <Posts exclude={[post.slug]} range={[1, 2]} columns="2" thumbnail direction="column" />
-          </Column>
-          <ScrollToHash />
-        </Column>
-      </Row>
-      <Column
-        maxWidth={12}
-        paddingLeft="40"
-        fitHeight
-        position="sticky"
-        top="80"
-        gap="16"
-        m={{ hide: true }}
-      >
-        <HeadingNav fitHeight />
-      </Column>
-    </Row>
+          {nextPost ? (
+            <Link
+              href={`/blog/${getSlug(nextPost)}`}
+              className="group flex-1 flex flex-col gap-1 p-4 rounded-lg border border-border hover:bg-accent/50 transition-colors text-right"
+            >
+              <span className="flex items-center justify-end gap-1 text-xs text-muted-foreground">
+                Next
+                <ChevronRight className="size-3" />
+              </span>
+              <span className="text-sm font-medium group-hover:text-foreground transition-colors whitespace-normal wrap-break-word">
+                {nextPost.title}
+              </span>
+            </Link>
+          ) : (
+            <div className="hidden sm:block flex-1" />
+          )}
+        </div>
+      </nav>
+    </section>
   );
 }
