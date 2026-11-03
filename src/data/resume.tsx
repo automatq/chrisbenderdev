@@ -344,6 +344,8 @@ export const DATA = {
       active: true,
       description:
         "A trade-facing site for an Icelandic ground operator selling ready-made tour programmes to agencies and planners. Each itinerary gets a full page — day-by-day route, driving distances, highlights and an interactive regional map — so a partner can price and sell a departure without a single email back and forth.",
+      technical:
+        "React on Vite, code-split into app and vendor bundles and served from Vercel's edge cache. Every itinerary is a route that emits TouristTrip and TouristDestination JSON-LD next to the interactive regional map, so a programme can surface as a rich result; imagery ships as AVIF and WebP with preload hints on the hero and lazy loading everywhere below it.",
       technologies: ["React", "Vite", "Tailwind CSS", "Interactive Maps"],
       links: [
         {
@@ -362,6 +364,8 @@ export const DATA = {
       active: true,
       description:
         "A warm, photography-led site for a licensed Montessori centre running two Mississauga locations. Toddler and preschool programs, hours and contact details for each centre are split cleanly so a parent lands on the one nearest them and enquires in a couple of taps.",
+      technical:
+        "Next.js App Router, prerendered at build and revalidated on a five-minute stale window at the edge. Each centre emits ChildCare, PostalAddress and OpeningHoursSpecification JSON-LD so hours and addresses resolve in local search rather than only on the page, and fonts are self-hosted with font-display: swap to keep text painting on the first frame.",
       technologies: ["Next.js", "React", "Tailwind CSS", "Responsive Design"],
       links: [
         {
@@ -380,6 +384,8 @@ export const DATA = {
       active: true,
       description:
         "A playful marketing site for a licensed Brampton nursery school, built around one action: book a tour. The logo's alphabet blocks drive the whole identity, and the fee, subsidy and handbook questions parents used to phone in about all live on their own pages.",
+      technical:
+        "Next.js App Router, prerendered with the same five-minute revalidation window. The local-search layer carries BreadcrumbList, ChildCare, City and OpeningHoursSpecification JSON-LD, and the same business facts are published as an llms.txt so AI assistants answer from the source instead of paraphrasing the marketing copy.",
       technologies: ["Next.js", "React", "Tailwind CSS", "Motion Design"],
       review: {
         quote:
@@ -405,6 +411,8 @@ export const DATA = {
       active: true,
       description:
         "A site with some shop floor grit for a family-owned Waterloo precision machining shop running since 1986. Five service lines, real capability numbers and shop-floor photography carry the credibility, with a quote request as the single call to action.",
+      technical:
+        "React on Vite with no CMS behind it: content lives in typed components, so the build collapses to one hashed JS bundle and one stylesheet served from Vercel's edge cache. Nothing is fetched at runtime, which is why the shop-floor photography is the only thing left to pay for on load.",
       technologies: ["React", "Vite", "Tailwind CSS", "Custom UI Components"],
       review: {
         quote:
@@ -430,6 +438,8 @@ export const DATA = {
       active: true,
       description:
         "A studio site for a one-person software product studio in Kitchener, built as a long-form scrolling case study for its flagship product, SAVX — a Canadian grocery savings app. Scroll-driven animation carries the narrative from the problem through the AI pipeline to pricing, without the page ever feeling like a deck.",
+      technical:
+        "A static document driven by GSAP timelines pinned to scroll position, with Three.js handling the dimensional moments. There is no client-side router and no framework runtime: the whole case study is one HTML file, so the narrative never waits on hydration before it can move.",
       technologies: ["JavaScript", "GSAP", "Scroll Animation", "Static Site"],
       review: {
         quote:
@@ -455,6 +465,8 @@ export const DATA = {
       active: true,
       description:
         "A lead-generation site for a general contractor across Guelph, Kitchener-Waterloo and the GTA, built around a three-step quote flow: name and number, then the job and a few photos, then an estimate in 24 hours. Every service area gets a local page written for that market, and the business facts are published as an llms.txt and agent card so AI assistants answer from the source.",
+      technical:
+        "Hand-written HTML, CSS and JavaScript — no framework, no build step — on Vercel's edge. The weight is in the discovery layer: GeneralContractor, FAQPage, City and AdministrativeArea JSON-LD per service area, a sitemap, GA4, WebP imagery, plus an llms.txt and a /.well-known/agent.json agent card so assistants quote the business rather than guess at it.",
       technologies: ["HTML", "CSS", "JavaScript", "Local SEO"],
       review: {
         quote:

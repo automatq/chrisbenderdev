@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { Timeline, TimelineConnectItem, TimelineItem } from "@/components/timeline";
+import TechNote from "@/components/tech-note";
 import { Badge } from "@/components/ui/badge";
 import { DATA } from "@/data/resume";
 import { ArrowUpRight } from "lucide-react";
@@ -71,6 +72,7 @@ export default function ProjectsSection() {
                 <p className="text-sm leading-relaxed text-muted-foreground wrap-break-word">
                   {project.description}
                 </p>
+                <TechNote label={project.title}>{project.technical}</TechNote>
                 {"review" in project && project.review && (
                   <blockquote className="mt-1 border-l-2 border-primary/30 pl-3">
                     <p
