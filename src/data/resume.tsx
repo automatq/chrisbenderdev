@@ -7,6 +7,7 @@ import { Nodejs } from "@/components/ui/svgs/nodejs";
 import { Postgresql } from "@/components/ui/svgs/postgresql";
 import { Docker } from "@/components/ui/svgs/docker";
 import { Csharp } from "@/components/ui/svgs/csharp";
+import { FaAws } from "react-icons/fa6";
 import {
   SiAnthropic,
   SiClaudecode,
@@ -72,6 +73,7 @@ const skills: Skill[] = [
   { name: "Square", icon: SiSquare },
   { name: "Vercel", icon: SiVercel },
   { name: "Cloudflare", icon: SiCloudflare },
+  { name: "AWS", icon: FaAws },
   { name: "Anthropic SDK", icon: SiAnthropic },
   { name: "Claude Code", icon: SiClaudecode },
   { name: "Swift", icon: SiSwift },
@@ -148,7 +150,7 @@ export const DATA = {
       start: "2025",
       end: "Present",
       description:
-        "Automatq is my agency, building modern websites, AI automations, and digital systems for founders and small teams. We pair clean code and considered design with practical automation to ship products that move metrics, not just look good.",
+        "Automatq is my agency, building modern websites, AI automations, and digital systems for founders, small teams, and enterprise organizations. We pair clean code and considered design with practical automation to ship products that move metrics, not just look good.",
     },
   ],
   education,
