@@ -277,7 +277,7 @@ export const DATA = {
   description:
     "I design and develop performant websites, applications, and custom software for founders, growing teams, and enterprise organizations.",
   summary:
-    "I'm a developer and designer based in Kitchener-Waterloo, Ontario, dedicated to crafting immersive digital experiences. My work bridges the gap between creative code and functional design, focusing on performance, interaction, and clean aesthetics. I work directly with founders and teams: no hand-offs, no middlemen, fast iteration from first call to launch. Every site is handcrafted with custom design and custom code, built to feel like yours and no one else's. Through [Automatq](https://automatq.com), I create custom websites, software, applications, and AI automation systems—digital products designed around how each business works and where it wants to go. I work with clients across Canada and internationally.",
+    "From the first conversation to launch, you work directly with me.\n\nI'm Chris, founder of [Automatq](https://automatq.com), based in Kitchener-Waterloo, Ontario. I partner with clients across Canada and internationally, keeping communication clear, decisions simple, and projects moving fast. Every detail is tailored to your business.",
   avatarUrl: "/me.jpg",
   skills,
   navbar: [
