@@ -36,7 +36,10 @@ export default function ProjectsSection() {
               className="flex w-full items-start justify-between gap-5 sm:gap-10"
             >
               <TimelineConnectItem className="flex items-start justify-center">
-                {project.image ? (
+                {/* Length rather than truthiness: DATA is `as const`, so a bare
+                    `project.image ?` makes TS treat the monogram branch as dead
+                    once every project has an icon, and narrows project to never. */}
+                {project.image.length > 0 ? (
                   <img
                     src={project.image}
                     alt=""

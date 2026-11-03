@@ -261,60 +261,6 @@ export const DATA = {
       image: "/projects/zoltan-builds.png",
       video: "",
     },
-    {
-      title: "Miknar Machine Inc.",
-      href: "https://sao-paulo-eta.vercel.app/",
-      dates: "2026",
-      active: true,
-      description:
-        "A professional online presence for a custom CNC machining company. The site showcases their precision machining capabilities and services, making it easy for potential clients to learn about their expertise and get in touch.",
-      technologies: ["React", "Framer Motion", "JavaScript", "Custom UI Components"],
-      links: [
-        {
-          type: "Website",
-          href: "https://sao-paulo-eta.vercel.app/",
-          icon: <Icons.globe className="size-3" />,
-        },
-      ],
-      image: "",
-      video: "",
-    },
-    {
-      title: "Amethyst Expedition",
-      href: "https://web-production-2f8f8.up.railway.app/",
-      dates: "2026",
-      active: true,
-      description:
-        "A striking website for Amethyst Expedition, curators of the subterranean. The site showcases Brazil's amethyst expeditions with an immersive design that captures the beauty and mystery of underground exploration.",
-      technologies: ["React", "Next.js", "Tailwind CSS", "Custom UI Components"],
-      links: [
-        {
-          type: "Website",
-          href: "https://web-production-2f8f8.up.railway.app/",
-          icon: <Icons.globe className="size-3" />,
-        },
-      ],
-      image: "",
-      video: "",
-    },
-    {
-      title: "Automatq",
-      href: "https://automatq.com",
-      dates: "2025 - Present",
-      active: true,
-      description:
-        "My agency. Modern websites, AI automations, and digital systems for founders and small teams, pairing clean code and considered design with practical automation.",
-      technologies: ["Web Development", "AI Automation", "Design Systems"],
-      links: [
-        {
-          type: "Website",
-          href: "https://automatq.com",
-          icon: <Icons.globe className="size-3" />,
-        },
-      ],
-      image: "",
-      video: "",
-    },
   ],
   hackathons,
 } as const;
