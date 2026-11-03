@@ -206,6 +206,37 @@ const openSource: OpenSourceProject[] = [
     ],
   },
   {
+    title: "Link in Bio",
+    repo: "automatq/linktree",
+    href: "https://github.com/automatq/linktree",
+    description:
+      "A creator platform sitting behind one public profile page: links and groups, a gallery, events, a Stripe store and checkout, bookings with reminder emails, polls, reviews, a guest wall and voice rooms. The owner drives all of it from an admin workspace that also runs email campaigns against subscriber audiences, tracking pixels, per-link click tracking, and a custom domain with its own verification step.",
+    role: "Creator & maintainer",
+    technologies: [
+      "TypeScript",
+      "Next.js",
+      "React",
+      "Drizzle ORM",
+      "Neon Postgres",
+      "Clerk",
+      "Stripe",
+      "Vercel Blob",
+      "Resend",
+      "Twilio",
+      "qrcode.react",
+      "next-themes",
+      "Vercel Cron",
+      "Vercel",
+    ],
+    links: [
+      {
+        type: "Repository",
+        href: "https://github.com/automatq/linktree",
+        icon: <Icons.github className="size-3" />,
+      },
+    ],
+  },
+  {
     title: "chrisbender.dev",
     repo: "automatq/chrisbenderdev",
     href: "https://github.com/automatq/chrisbenderdev",
