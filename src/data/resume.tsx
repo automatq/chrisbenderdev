@@ -327,7 +327,7 @@ export const DATA = {
       badges: [],
       location: "Kitchener-Waterloo, ON",
       title: "Founder, Web Development & AI Automation",
-      logoUrl: "",
+      logoUrl: "/automatq.svg",
       start: "2025",
       end: "Present",
       description:
