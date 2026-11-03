@@ -24,15 +24,23 @@ export default function ContactSection() {
           Get in Touch
         </h2>
         <p className="mx-auto max-w-lg text-muted-foreground text-balance">
-          Have a project in mind? Send me an email at{" "}
+          Want to chat? Just shoot me a{" "}
+          <Link
+            href={DATA.contact.social.LinkedIn.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
+          >
+            DM
+          </Link>{" "}
+          with a direct question or email me at{" "}
           <Link
             href={`mailto:${DATA.contact.email}`}
             className="text-blue-500 hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
           >
             {DATA.contact.email}
-          </Link>{" "}
-          and I&apos;ll respond whenever I can. Every engagement starts with a signed
-          contract and secure invoicing through Square.
+          </Link>
+          . I will ignore all soliciting.
         </p>
       </div>
     </div>
