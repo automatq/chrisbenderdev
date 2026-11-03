@@ -120,9 +120,9 @@ export default function OpenSourceSection() {
             href={DATA.contact.social.GitHub.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex min-h-40 flex-col items-center justify-center gap-2 rounded-xl border border-dashed p-5 text-center transition-colors hover:border-foreground/30 hover:bg-card"
+            className="group flex flex-wrap items-center justify-center gap-x-3 gap-y-1 rounded-xl border border-dashed p-5 text-center transition-colors hover:border-foreground/30 hover:bg-card sm:col-span-2"
           >
-            <Icons.github className="size-6 text-muted-foreground transition-colors group-hover:text-foreground" />
+            <Icons.github className="size-5 text-muted-foreground transition-colors group-hover:text-foreground" />
             <span className="flex items-center gap-1.5 font-semibold leading-none">
               More on GitHub
               <ArrowUpRight
