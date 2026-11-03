@@ -1,5 +1,5 @@
 import { Icons } from "@/components/icons";
-import { HomeIcon, NotebookIcon } from "lucide-react";
+import { HomeIcon, NotebookIcon, ShieldCheck } from "lucide-react";
 import { ReactLight } from "@/components/ui/svgs/reactLight";
 import { NextjsIconDark } from "@/components/ui/svgs/nextjsIconDark";
 import { Typescript } from "@/components/ui/svgs/typescript";
@@ -38,9 +38,8 @@ type Education = {
   school: string;
   href: string;
   degree: string;
-  logoUrl: string;
-  start: string;
-  end: string;
+  icon: React.ComponentType<{ className?: string }>;
+  status: string;
 };
 
 type Hackathon = {
@@ -55,7 +54,22 @@ type Hackathon = {
 };
 
 // Add entries here to show the Education and Hackathons sections on the home page.
-const education: Education[] = [];
+const education: Education[] = [
+  {
+    school: "Amazon Web Services (AWS)",
+    href: "https://aws.amazon.com/certification/certified-generative-ai-developer-professional/",
+    degree: "AWS Certified Generative AI Developer – Professional",
+    icon: FaAws,
+    status: "In Progress · Exam AIP-C01",
+  },
+  {
+    school: "CompTIA",
+    href: "https://www.comptia.org/en-us/certifications/security/",
+    degree: "CompTIA Security+",
+    icon: ShieldCheck,
+    status: "Certified",
+  },
+];
 const hackathons: Hackathon[] = [];
 
 const skills: Skill[] = [
@@ -96,7 +110,7 @@ export const DATA = {
   description:
     "I design and develop performant websites, applications, and custom software for founders, growing teams, and enterprise organizations.",
   summary:
-    "I'm a developer and designer based in Kitchener-Waterloo, Ontario, dedicated to crafting immersive digital experiences. My work bridges the gap between creative code and functional design, focusing on performance, interaction, and clean aesthetics. I work directly with founders and teams: no hand-offs, no middlemen, fast iteration from first call to launch. Every site is handcrafted with custom design and custom code, built to feel like yours and no one else's. Alongside my own practice, I run [Automatq](https://automatq.com), an agency delivering productized web and AI automation services for businesses. I work with clients across Canada and internationally.",
+    "I'm a developer and designer based in Kitchener-Waterloo, Ontario, dedicated to crafting immersive digital experiences. My work bridges the gap between creative code and functional design, focusing on performance, interaction, and clean aesthetics. I work directly with founders and teams: no hand-offs, no middlemen, fast iteration from first call to launch. Every site is handcrafted with custom design and custom code, built to feel like yours and no one else's. Through [Automatq](https://automatq.com), I create custom websites, software, applications, and AI automation systems—digital products designed around how each business works and where it wants to go. I work with clients across Canada and internationally.",
   avatarUrl: "/me.jpg",
   skills,
   navbar: [
@@ -185,7 +199,7 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "",
+      image: "/projects/markedup.png",
       video: "",
     },
     {
@@ -224,7 +238,7 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "",
+      image: "/projects/maintek-cmms.png",
       video: "",
     },
     {
@@ -325,6 +339,13 @@ export const DATA = {
       description:
         "A lead-generation site for a general contractor across Guelph, Kitchener-Waterloo and the GTA, built around a three-step quote flow: name and number, then the job and a few photos, then an estimate in 24 hours. Every service area gets a local page written for that market, and the business facts are published as an llms.txt and agent card so AI assistants answer from the source.",
       technologies: ["HTML", "CSS", "JavaScript", "Local SEO"],
+      review: {
+        quote:
+          "Chris built my site from scratch and now handles all the hosting and ongoing maintenance. He keeps everything running smoothly so I don't have to worry about a thing.",
+        author: "Zoltan Matus",
+        rating: 5,
+        href: "https://share.google/7wGnJev91jq5ig86l",
+      },
       links: [
         {
           type: "Website",

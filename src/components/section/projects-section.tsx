@@ -71,6 +71,31 @@ export default function ProjectsSection() {
                 <p className="text-sm leading-relaxed text-muted-foreground wrap-break-word">
                   {project.description}
                 </p>
+                {"review" in project && project.review && (
+                  <blockquote className="mt-1 border-l-2 border-primary/30 pl-3">
+                    <p
+                      className="text-xs tracking-widest text-amber-500"
+                      aria-label={`${project.review.rating} out of 5 stars`}
+                    >
+                      {"★".repeat(project.review.rating)}
+                    </p>
+                    <p className="mt-1 text-sm leading-relaxed text-foreground/80">
+                      “{project.review.quote}”
+                    </p>
+                    <Link
+                      href={project.review.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group mt-1.5 flex w-fit items-center gap-1 text-xs font-medium text-muted-foreground hover:text-foreground"
+                    >
+                      {project.review.author} · Google review
+                      <ArrowUpRight
+                        className="size-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                        aria-hidden="true"
+                      />
+                    </Link>
+                  </blockquote>
+                )}
                 <div className="mt-1 flex flex-wrap gap-1.5">
                   {project.technologies.map((technology) => (
                     <Badge
