@@ -5,6 +5,7 @@ import { DATA } from "@/data/resume";
 import Link from "next/link";
 import Markdown from "react-markdown";
 import ContactSection from "@/components/section/contact-section";
+import OpenSourceSection from "@/components/section/open-source-section";
 import ProjectsSection from "@/components/section/projects-section";
 import WorkSection from "@/components/section/work-section";
 import { ArrowUpRight } from "lucide-react";
@@ -129,6 +130,13 @@ export default function Page() {
           <ProjectsSection />
         </BlurFade>
       </section>
+      {DATA.openSource.length > 0 && (
+      <section id="open-source">
+        <BlurFade delay={BLUR_FADE_DELAY * 13}>
+          <OpenSourceSection />
+        </BlurFade>
+      </section>
+      )}
       <section id="contact">
         <BlurFade delay={BLUR_FADE_DELAY * 16}>
           <ContactSection />

@@ -42,6 +42,18 @@ type Education = {
   status: string;
 };
 
+type OpenSourceProject = {
+  title: string;
+  repo: string;
+  href: string;
+  description: string;
+  role: string;
+  license?: string;
+  technologies: string[];
+  image?: string;
+  links: { type: string; icon: React.ReactNode; href: string }[];
+};
+
 type Hackathon = {
   title: string;
   dates: string;
@@ -71,6 +83,87 @@ const education: Education[] = [
   },
 ];
 const hackathons: Hackathon[] = [];
+
+// Repos I maintain in public. Client work lives in `projects` instead.
+const openSource: OpenSourceProject[] = [
+  {
+    title: "MainTek CMMS",
+    repo: "automatq/cmms",
+    href: "https://github.com/automatq/cmms",
+    description:
+      "An open, multi-tenant maintenance management platform: assets, work orders, preventive maintenance schedules, inventory, procurement and reporting, plus an AI assistant and a technician mobile app. Built as a NestJS + Next.js + Expo monorepo that teams can self-host instead of paying per seat.",
+    role: "Creator & maintainer",
+    technologies: [
+      "NestJS",
+      "Next.js",
+      "Expo",
+      "PostgreSQL",
+      "Redis",
+      "Docker",
+      "Terraform",
+    ],
+    image: "/projects/maintek-cmms.png",
+    links: [
+      {
+        type: "Repository",
+        href: "https://github.com/automatq/cmms",
+        icon: <Icons.github className="size-3" />,
+      },
+      {
+        type: "Website",
+        href: "https://maintek.app",
+        icon: <Icons.globe className="size-3" />,
+      },
+    ],
+  },
+  {
+    title: "MarkedUp",
+    repo: "automatq/markedup",
+    href: "https://github.com/automatq/markedup",
+    description:
+      "A collaborative, block-based Markdown workspace with real-time editing, backlinks, databases, wikis, whiteboards, spreadsheets, calls, publishing and AI writing tools. The whole editor stack is public so anyone can read how the collaborative pieces fit together.",
+    role: "Creator & maintainer",
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "TipTap",
+      "Liveblocks",
+      "Yjs",
+      "Prisma",
+      "Neon Postgres",
+    ],
+    image: "/projects/markedup.png",
+    links: [
+      {
+        type: "Repository",
+        href: "https://github.com/automatq/markedup",
+        icon: <Icons.github className="size-3" />,
+      },
+      {
+        type: "Website",
+        href: "https://markedup-smoky.vercel.app",
+        icon: <Icons.globe className="size-3" />,
+      },
+    ],
+  },
+  {
+    title: "chrisbender.dev",
+    repo: "automatq/chrisbenderdev",
+    href: "https://github.com/automatq/chrisbenderdev",
+    description:
+      "The site you are reading, MIT licensed and free to fork: a Next.js portfolio with an MDX blog, generated OG images, dark mode and a single resume file that drives every section.",
+    role: "Creator & maintainer",
+    license: "MIT",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "MDX", "Motion"],
+    links: [
+      {
+        type: "Repository",
+        href: "https://github.com/automatq/chrisbenderdev",
+        icon: <Icons.github className="size-3" />,
+      },
+    ],
+  },
+];
 
 const skills: Skill[] = [
   { name: "TypeScript", icon: Typescript },
@@ -168,79 +261,8 @@ export const DATA = {
     },
   ],
   education,
+  openSource,
   projects: [
-    {
-      title: "MarkedUp",
-      href: "https://markedup-smoky.vercel.app",
-      dates: "2026",
-      active: true,
-      description:
-        "A collaborative, block-based Markdown workspace with real-time editing, backlinks, databases, wikis, whiteboards, spreadsheets, calls, publishing, and AI-powered writing and operations tools.",
-      technologies: [
-        "Next.js",
-        "TypeScript",
-        "TipTap",
-        "Liveblocks",
-        "Yjs",
-        "Clerk",
-        "Prisma",
-        "Neon Postgres",
-        "OpenAI",
-      ],
-      links: [
-        {
-          type: "Website",
-          href: "https://markedup-smoky.vercel.app",
-          icon: <Icons.globe className="size-3" />,
-        },
-        {
-          type: "Source",
-          href: "https://github.com/automatq/markedup",
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
-      image: "/projects/markedup.png",
-      video: "",
-    },
-    {
-      title: "MainTek CMMS",
-      href: "https://github.com/automatq/cmms",
-      dates: "2026",
-      active: true,
-      description:
-        "A full-stack maintenance management platform for tracking assets, work orders, preventive maintenance, inventory, procurement, and operational reporting. It includes real-time updates, an AI assistant, and a mobile app for technicians in the field.",
-      technologies: [
-        "NestJS",
-        "TypeORM",
-        "PostgreSQL",
-        "Redis",
-        "BullMQ",
-        "Next.js",
-        "React",
-        "Tailwind CSS",
-        "shadcn/ui",
-        "Recharts",
-        "Expo",
-        "React Native",
-        "Socket.io",
-        "MinIO / AWS S3",
-        "AWS Bedrock / Ollama",
-        "Stripe",
-        "Docker Compose",
-        "Terraform",
-        "AWS ECS / RDS / ElastiCache",
-        "Caddy",
-      ],
-      links: [
-        {
-          type: "Source",
-          href: "https://github.com/automatq/cmms",
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
-      image: "/projects/maintek-cmms.png",
-      video: "",
-    },
     {
       title: "Idcibidci",
       href: "https://www.idcibidci.is/tours/std02r7",
@@ -285,6 +307,13 @@ export const DATA = {
       description:
         "A playful marketing site for a licensed Brampton nursery school, built around one action: book a tour. The logo's alphabet blocks drive the whole identity, and the fee, subsidy and handbook questions parents used to phone in about all live on their own pages.",
       technologies: ["Next.js", "React", "Tailwind CSS", "Motion Design"],
+      review: {
+        quote:
+          "Amazing solution and timely delivery. Will definitely use them again.",
+        author: "N L",
+        rating: 5,
+        href: "https://share.google/qlCrZ0Yl5k7P19HII",
+      },
       links: [
         {
           type: "Website",
@@ -303,6 +332,13 @@ export const DATA = {
       description:
         "A site with some shop floor grit for a family-owned Waterloo precision machining shop running since 1986. Five service lines, real capability numbers and shop-floor photography carry the credibility, with a quote request as the single call to action.",
       technologies: ["React", "Vite", "Tailwind CSS", "Custom UI Components"],
+      review: {
+        quote:
+          "Working with him made the entire project incredibly easy. He truly understands our needs and is fantastic to work with. Highly recommended!",
+        author: "Albert Martin",
+        rating: 5,
+        href: "https://share.google/fZuJHrxR1iLeRfDV3",
+      },
       links: [
         {
           type: "Website",
@@ -321,6 +357,13 @@ export const DATA = {
       description:
         "A studio site for a one-person software product studio in Kitchener, built as a long-form scrolling case study for its flagship product, SAVX — a Canadian grocery savings app. Scroll-driven animation carries the narrative from the problem through the AI pipeline to pricing, without the page ever feeling like a deck.",
       technologies: ["JavaScript", "GSAP", "Scroll Animation", "Static Site"],
+      review: {
+        quote:
+          "Actually blew my mind what he could do for me, website was more than I expected. Quick communication when I needed the website updated. Deployed within minutes.",
+        author: "Paul Tulai",
+        rating: 5,
+        href: "https://share.google/dEzpqaGctsjwF6dqY",
+      },
       links: [
         {
           type: "Website",
