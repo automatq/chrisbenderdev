@@ -94,7 +94,7 @@ export const DATA = {
   description:
     "I design and develop performant websites, applications, and custom software for founders, growing teams, and enterprise organizations.",
   summary:
-    "I'm a developer and designer based in Kitchener-Waterloo, Ontario, dedicated to crafting immersive digital experiences. My work bridges the gap between creative code and functional design, focusing on performance, interaction, and clean aesthetics. I work directly with founders and teams: no hand-offs, no middlemen, fast iteration from first call to launch. Every site is handcrafted with custom design and custom code, built to feel like yours and no one else's. Alongside my own practice I run [Automatq](https://automatq.com), an agency delivering productized web and AI automation services for businesses. I work with clients across Canada and internationally.",
+    "I'm a developer and designer based in Kitchener-Waterloo, Ontario, dedicated to crafting immersive digital experiences. My work bridges the gap between creative code and functional design, focusing on performance, interaction, and clean aesthetics. I work directly with founders and teams: no hand-offs, no middlemen, fast iteration from first call to launch. Every site is handcrafted with custom design and custom code, built to feel like yours and no one else's. Alongside my own practice, I run [Automatq](https://automatq.com), an agency delivering productized web and AI automation services for businesses. I work with clients across Canada and internationally.",
   avatarUrl: "/me.jpg",
   skills,
   navbar: [
