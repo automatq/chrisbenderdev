@@ -338,46 +338,6 @@ export const DATA = {
   openSource,
   projects: [
     {
-      title: "Idcibidci",
-      href: "https://www.idcibidci.is/tours/std02r7",
-      dates: "2026",
-      active: true,
-      description:
-        "A trade-facing site for an Icelandic ground operator selling ready-made tour programmes to agencies and planners. Each itinerary gets a full page — day-by-day route, driving distances, highlights and an interactive regional map — so a partner can price and sell a departure without a single email back and forth.",
-      technical:
-        "React on Vite, code-split into app and vendor bundles and served from Vercel's edge cache. Every itinerary is a route that emits TouristTrip and TouristDestination JSON-LD next to the interactive regional map, so a programme can surface as a rich result; imagery ships as AVIF and WebP with preload hints on the hero and lazy loading everywhere below it.",
-      technologies: ["React", "Vite", "Tailwind CSS", "Interactive Maps"],
-      links: [
-        {
-          type: "Website",
-          href: "https://www.idcibidci.is/tours/std02r7",
-          icon: <Icons.globe className="size-3" />,
-        },
-      ],
-      image: "/projects/idcibidci.png",
-      video: "",
-    },
-    {
-      title: "Brilliant Minds Montessori",
-      href: "https://brilliantmindsmontessori.com",
-      dates: "2026",
-      active: true,
-      description:
-        "A warm, photography-led site for a licensed Montessori centre running two Mississauga locations. Toddler and preschool programs, hours and contact details for each centre are split cleanly so a parent lands on the one nearest them and enquires in a couple of taps.",
-      technical:
-        "Next.js App Router, prerendered at build and revalidated on a five-minute stale window at the edge. Each centre emits ChildCare, PostalAddress and OpeningHoursSpecification JSON-LD so hours and addresses resolve in local search rather than only on the page, and fonts are self-hosted with font-display: swap to keep text painting on the first frame.",
-      technologies: ["Next.js", "React", "Tailwind CSS", "Responsive Design"],
-      links: [
-        {
-          type: "Website",
-          href: "https://brilliantmindsmontessori.com",
-          icon: <Icons.globe className="size-3" />,
-        },
-      ],
-      image: "/projects/brilliant-minds-montessori.png",
-      video: "",
-    },
-    {
       title: "Building Blocks Nursery School",
       href: "https://buildingblocks-nine.vercel.app/",
       dates: "2026",
@@ -402,6 +362,46 @@ export const DATA = {
         },
       ],
       image: "/projects/building-blocks.png",
+      video: "",
+    },
+    {
+      title: "Brilliant Minds Montessori",
+      href: "https://brilliantmindsmontessori.com",
+      dates: "2026",
+      active: true,
+      description:
+        "A warm, photography-led site for a licensed Montessori centre running two Mississauga locations. Toddler and preschool programs, hours and contact details for each centre are split cleanly so a parent lands on the one nearest them and enquires in a couple of taps.",
+      technical:
+        "Next.js App Router, prerendered at build and revalidated on a five-minute stale window at the edge. Each centre emits ChildCare, PostalAddress and OpeningHoursSpecification JSON-LD so hours and addresses resolve in local search rather than only on the page, and fonts are self-hosted with font-display: swap to keep text painting on the first frame.",
+      technologies: ["Next.js", "React", "Tailwind CSS", "Responsive Design"],
+      links: [
+        {
+          type: "Website",
+          href: "https://brilliantmindsmontessori.com",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: "/projects/brilliant-minds-montessori.png",
+      video: "",
+    },
+    {
+      title: "Idcibidci",
+      href: "https://www.idcibidci.is/tours/std02r7",
+      dates: "2026",
+      active: true,
+      description:
+        "A trade-facing site for an Icelandic ground operator selling ready-made tour programmes to agencies and planners. Each itinerary gets a full page — day-by-day route, driving distances, highlights and an interactive regional map — so a partner can price and sell a departure without a single email back and forth.",
+      technical:
+        "React on Vite, code-split into app and vendor bundles and served from Vercel's edge cache. Every itinerary is a route that emits TouristTrip and TouristDestination JSON-LD next to the interactive regional map, so a programme can surface as a rich result; imagery ships as AVIF and WebP with preload hints on the hero and lazy loading everywhere below it.",
+      technologies: ["React", "Vite", "Tailwind CSS", "Interactive Maps"],
+      links: [
+        {
+          type: "Website",
+          href: "https://www.idcibidci.is/tours/std02r7",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: "/projects/idcibidci.png",
       video: "",
     },
     {
