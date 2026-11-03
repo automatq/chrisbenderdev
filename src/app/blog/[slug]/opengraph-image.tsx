@@ -3,9 +3,7 @@
 import { ImageResponse } from "next/og";
 import { allPosts } from "content-collections";
 import { DATA } from "@/data/resume";
-import { getAvatarDataUrl } from "@/lib/og-avatar";
-
-export const runtime = "edge";
+import { getAvatarDataUrl, getOgFonts } from "@/lib/og-assets";
 
 export const alt = "Blog Post";
 export const size = {
@@ -14,28 +12,11 @@ export const size = {
 };
 export const contentType = "image/png";
 
-const getFontData = async () => {
-    try {
-        const [cabinetGrotesk, clashDisplay] = await Promise.all([
-            fetch(
-                new URL(
-                    "../../../../public/fonts/CabinetGrotesk-Medium.ttf",
-                    import.meta.url
-                )
-            ).then((res) => res.arrayBuffer()),
-            fetch(
-                new URL(
-                    "../../../../public/fonts/ClashDisplay-Semibold.ttf",
-                    import.meta.url
-                )
-            ).then((res) => res.arrayBuffer()),
-        ]);
-        return { cabinetGrotesk, clashDisplay };
-    } catch (error) {
-        console.error("Failed to load fonts:", error);
-        return null;
-    }
-};
+const getFontData = () =>
+    getOgFonts(
+        new URL("../../../../public/fonts/CabinetGrotesk-Medium.ttf", import.meta.url),
+        new URL("../../../../public/fonts/ClashDisplay-Semibold.ttf", import.meta.url)
+    );
 
 const styles = {
     outerWrapper: {

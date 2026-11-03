@@ -4,23 +4,68 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { paginate, normalizePage } from "@/lib/pagination";
 import { ChevronRight } from "lucide-react";
+import JsonLd from "@/components/json-ld";
+import { alternates } from "@/lib/seo";
+import { DATA } from "@/data/resume";
+import { ID, breadcrumbNode, graph } from "@/lib/structured-data";
+
+const blogDescription =
+  "Articles by Chris Bender about custom software, web development, product design, AI automation, and building digital products.";
 
 export const metadata: Metadata = {
   title: "Blog",
-  description: "Thoughts on software development, life, and more.",
+  description: blogDescription,
+  alternates: alternates("/blog"),
+  robots: allPosts.length > 0
+    ? { index: true, follow: true }
+    : { index: false, follow: true },
   openGraph: {
     title: "Blog",
-    description: "Thoughts on software development, life, and more.",
+    description: blogDescription,
+    url: "/blog",
   },
   twitter: {
     card: "summary_large_image",
     title: "Blog",
-    description: "Thoughts on software development, life, and more.",
+    description: blogDescription,
   },
 };
 
 const PAGE_SIZE = 5;
 const BLUR_FADE_DELAY = 0.04;
+
+function blogGraph(posts: typeof allPosts) {
+  return graph([
+    {
+      "@type": "Blog",
+      "@id": ID.blog,
+      url: `${DATA.url}/blog`,
+      name: `${DATA.name} Blog`,
+      description: blogDescription,
+      inLanguage: "en-CA",
+      isPartOf: { "@id": ID.website },
+      author: { "@id": ID.person },
+      publisher: { "@id": ID.person },
+      blogPost: posts.map((post) => {
+        const slug = post._meta.path.replace(/\.mdx$/, "");
+        return {
+          "@type": "BlogPosting",
+          "@id": `${DATA.url}/blog/${slug}#article`,
+          headline: post.title,
+          description: post.summary,
+          url: `${DATA.url}/blog/${slug}`,
+          datePublished: post.publishedAt,
+          dateModified: post.updatedAt ?? post.publishedAt,
+          author: { "@type": "Person", name: post.author ?? DATA.name },
+        };
+      }),
+    },
+    breadcrumbNode([
+      { name: "Home", path: "/" },
+      { name: "Blog", path: "/blog" },
+    ]),
+  ]);
+}
 
 export default async function BlogPage({
   searchParams,
@@ -46,10 +91,12 @@ export default async function BlogPage({
 
   return (
     <section id="blog">
+      <JsonLd graph={blogGraph(sortedPosts)} />
       <BlurFade delay={BLUR_FADE_DELAY}>
         <h1 className="text-2xl font-semibold tracking-tight mb-2">Blog <span className="ml-1 bg-card border border-border rounded-md px-2 py-1 text-muted-foreground text-sm">{sortedPosts.length} posts</span></h1>
         <p className="text-sm text-muted-foreground mb-8">
-          My thoughts on software development, life, and more.
+          Notes on custom software, web development, product design, AI
+          automation, and building digital products.
         </p>
       </BlurFade>
 

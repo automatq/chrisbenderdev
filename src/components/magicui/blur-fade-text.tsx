@@ -16,6 +16,14 @@ interface BlurFadeTextProps {
   delay?: number;
   yOffset?: number;
   animateByCharacter?: boolean;
+  /** Element for the wrapper, so animated text can still be a real heading. */
+  as?: "div" | "h1" | "h2" | "h3" | "p";
+  /**
+   * Appended inside the wrapper but only exposed to screen readers and
+   * crawlers. Lets a short visible headline carry the full name and role
+   * without the design having to spell them out.
+   */
+  srOnlyText?: string;
 }
 const BlurFadeText = ({
   text,
@@ -26,6 +34,8 @@ const BlurFadeText = ({
   delay = 0,
   yOffset = 8,
   animateByCharacter = false,
+  as: Wrapper = "div",
+  srOnlyText,
 }: BlurFadeTextProps) => {
   const defaultVariants: Variants = {
     hidden: { y: -yOffset, opacity: 0, filter: "blur(8px)" },
@@ -34,9 +44,13 @@ const BlurFadeText = ({
   const combinedVariants = variant || defaultVariants;
   const characters = useMemo(() => Array.from(text), [text]);
 
+  const hiddenLabel = srOnlyText ? (
+    <span className="sr-only">{srOnlyText}</span>
+  ) : null;
+
   if (animateByCharacter) {
     return (
-      <div className="flex">
+      <Wrapper className="flex">
         {characters.map((char, i) => {
           const charVariants: Variants = {
             hidden: { y: -yOffset, opacity: 0, filter: "blur(8px)" },
@@ -60,12 +74,13 @@ const BlurFadeText = ({
             </motion.span>
           );
         })}
-      </div>
+        {hiddenLabel}
+      </Wrapper>
     );
   }
 
   return (
-    <div className="flex">
+    <Wrapper className="flex">
       <motion.span
         initial="hidden"
         animate="visible"
@@ -79,7 +94,8 @@ const BlurFadeText = ({
       >
         {text}
       </motion.span>
-    </div>
+      {hiddenLabel}
+    </Wrapper>
   );
 };
 

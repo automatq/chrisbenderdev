@@ -1,9 +1,9 @@
-/* eslint-disable @next/next/no-img-element */
 import { Timeline, TimelineConnectItem, TimelineItem } from "@/components/timeline";
 import TechNote from "@/components/tech-note";
 import { Badge } from "@/components/ui/badge";
 import { DATA } from "@/data/resume";
 import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function ProjectsSection() {
@@ -41,9 +41,11 @@ export default function ProjectsSection() {
                     `project.image ?` makes TS treat the monogram branch as dead
                     once every project has an icon, and narrows project to never. */}
                 {project.image.length > 0 ? (
-                  <img
+                  <Image
                     src={project.image}
                     alt=""
+                    width={40}
+                    height={40}
                     className="z-10 size-10 shrink-0 rounded-full border bg-card object-cover shadow ring-2 ring-border"
                   />
                 ) : (

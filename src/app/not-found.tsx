@@ -1,7 +1,15 @@
 import Link from "next/link";
 import { Home } from "lucide-react";
+import type { Metadata } from "next";
 
 import { Button } from "@/components/ui/button";
+
+/* The 404 status already keeps this out of the index; the explicit noindex
+   covers crawlers that reach it through a soft 404. */
+export const metadata: Metadata = {
+    title: "Page not found",
+    robots: { index: false, follow: true },
+};
 
 export default function NotFound() {
     return (

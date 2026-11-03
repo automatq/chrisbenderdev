@@ -1,9 +1,9 @@
-/* eslint-disable @next/next/no-img-element */
 import { Icons } from "@/components/icons";
 import { Badge } from "@/components/ui/badge";
 import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
 import { ArrowUpRight, Scale } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function OpenSourceSection() {
@@ -40,9 +40,11 @@ export default function OpenSourceSection() {
             >
               <div className="flex items-start gap-3">
                 {project.image ? (
-                  <img
+                  <Image
                     src={project.image}
                     alt=""
+                    width={40}
+                    height={40}
                     className="size-10 shrink-0 rounded-lg border object-cover shadow"
                   />
                 ) : (

@@ -1,7 +1,7 @@
 import BlurFade from "@/components/magicui/blur-fade";
 import BlurFadeText from "@/components/magicui/blur-fade-text";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DATA } from "@/data/resume";
+import Image from "next/image";
 import Link from "next/link";
 import Markdown from "react-markdown";
 import ContactSection from "@/components/section/contact-section";
@@ -9,21 +9,65 @@ import OpenSourceSection from "@/components/section/open-source-section";
 import ProjectsSection from "@/components/section/projects-section";
 import WorkSection from "@/components/section/work-section";
 import { ArrowUpRight } from "lucide-react";
+import type { Metadata } from "next";
+import JsonLd from "@/components/json-ld";
+import { alternates } from "@/lib/seo";
+import {
+  ID,
+  absoluteUrl,
+  clientWorkNode,
+  graph,
+  openSourceNode,
+  organizationNode,
+  personNode,
+  websiteNode,
+} from "@/lib/structured-data";
 
 const BLUR_FADE_DELAY = 0.04;
+
+export const metadata: Metadata = {
+  alternates: alternates("/"),
+};
+
+const homepageGraph = graph([
+  websiteNode(),
+  {
+    "@type": "ProfilePage",
+    "@id": ID.profilePage,
+    url: DATA.url,
+    name: `${DATA.name} — Custom Software Developer & Designer`,
+    description: DATA.description,
+    inLanguage: "en-CA",
+    isPartOf: { "@id": ID.website },
+    mainEntity: { "@id": ID.person },
+    about: { "@id": ID.person },
+    primaryImageOfPage: absoluteUrl(DATA.avatarUrl),
+    hasPart: [{ "@id": ID.clientWork }, { "@id": ID.openSource }],
+  },
+  personNode(),
+  organizationNode(),
+  clientWorkNode(),
+  openSourceNode(),
+]);
 
 export default function Page() {
   return (
     <main className="min-h-dvh flex flex-col gap-14 relative">
+      <JsonLd graph={homepageGraph} />
       <section id="hero">
         <div className="mx-auto w-full max-w-2xl space-y-8">
           <div className="gap-2 gap-y-6 flex flex-col md:flex-row justify-between">
             <div className="gap-2 flex flex-col order-2 md:order-1">
+              {/* The page's only h1. The visible greeting is deliberately
+                  short, so the full name and role ride along as screen
+                  reader-only text that matches the title and description. */}
               <BlurFadeText
+                as="h1"
                 delay={BLUR_FADE_DELAY}
                 className="text-3xl font-semibold tracking-tighter sm:text-4xl lg:text-5xl"
                 yOffset={8}
                 text="Hi, I'm Chris"
+                srOnlyText={` Bender — custom software developer and designer in ${DATA.location}`}
               />
               <BlurFadeText
                 className="text-muted-foreground max-w-[600px] md:text-lg lg:text-xl"
@@ -32,10 +76,19 @@ export default function Page() {
               />
             </div>
             <BlurFade delay={BLUR_FADE_DELAY} className="order-1 md:order-2">
-              <Avatar className="size-24 md:size-32 border rounded-full shadow-lg ring-4 ring-muted">
-                <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
-                <AvatarFallback>{DATA.initials}</AvatarFallback>
-              </Avatar>
+              {/* next/image rather than the Radix avatar: Radix probes the file
+                  from the client and server-renders only the initials, which
+                  kept the portrait out of the HTML entirely and pushed the
+                  largest above-the-fold image to after hydration. `priority`
+                  preloads it instead. */}
+              <Image
+                src={DATA.avatarUrl}
+                alt={`${DATA.name} — custom software developer and designer`}
+                width={128}
+                height={128}
+                priority
+                className="size-24 shrink-0 rounded-full border object-cover shadow-lg ring-4 ring-muted md:size-32"
+              />
             </BlurFade>
           </div>
         </div>
