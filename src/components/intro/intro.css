@@ -5,7 +5,7 @@
  * intro.tsx only decides whether to play (data-state="play"), and the overlay
  * retires itself with the last keyframe even if no further JavaScript runs.
  * Without data-state the overlay does not render at all, which is what
- * crawlers, no-JS visitors, repeat visits and reduced-motion users get.
+ * crawlers, no-JS visitors and reduced-motion users get.
  *
  * Timeline (seconds): 0.15 line draws · 0.55 title rises out of the line ·
  * 0.8 tagline drops out of it · 2.3 line cuts across the screen ·

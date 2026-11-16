@@ -7,8 +7,8 @@ import "./intro.css";
  * synchronously while the HTML is parsed, so a first-time visitor never sees
  * the page flash before the overlay covers it.
  *
- * Plays once per browser session, never for reduced-motion users, and can be
- * forced with ?intro in the URL. Any click, key, scroll or swipe skips it.
+ * Plays on every full load of the homepage, except for reduced-motion users.
+ * Any click, key, scroll or swipe skips it.
  *
  * The state lives on the overlay element rather than on <html>: React resets
  * <html> attributes on the Strict Mode remount in development, which would cut
@@ -17,11 +17,7 @@ import "./intro.css";
 const INTRO_SCRIPT = `(function(){
 var el=document.currentScript&&document.currentScript.previousElementSibling;
 if(!el)return;
-try{
-var force=/[?&]intro(=|&|$)/.test(location.search);
-if(!force&&(sessionStorage.getItem("intro-seen")||matchMedia("(prefers-reduced-motion: reduce)").matches))return;
-sessionStorage.setItem("intro-seen","1");
-}catch(e){return}
+if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
 var evs=["pointerdown","keydown","wheel","touchmove"];
 function off(){evs.forEach(function(n){removeEventListener(n,skip)})}
 function skip(){off();if(el.dataset.state==="play")el.dataset.state="skip"}
