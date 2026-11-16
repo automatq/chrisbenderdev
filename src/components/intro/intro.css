@@ -1,0 +1,247 @@
+/*
+ * Title-card intro for the homepage.
+ *
+ * Everything is CSS-timed so it never waits on hydration: the inline script in
+ * intro.tsx only decides whether to play (data-state="play"), and the overlay
+ * retires itself with the last keyframe even if no further JavaScript runs.
+ * Without data-state the overlay does not render at all, which is what
+ * crawlers, no-JS visitors, repeat visits and reduced-motion users get.
+ *
+ * Timeline (seconds): 0.15 line draws · 0.55 title rises out of the line ·
+ * 0.8 tagline drops out of it · 2.3 line cuts across the screen ·
+ * 2.7 the two halves part and the page settles in · 3.9 overlay retires.
+ */
+
+.intro {
+  display: none;
+}
+
+.intro[data-state="play"],
+.intro[data-state="skip"] {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow: hidden;
+  color: #fafafa;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* The page column is its own stacking context below the dock, so a z-index on
+   the overlay alone cannot cover the dock. Lift the whole column while the
+   intro is on screen. */
+.page-shell:has(> .intro[data-state="play"], > .intro[data-state="skip"]) {
+  z-index: 100;
+}
+
+.intro[data-state="play"] {
+  animation: intro-retire 1ms linear 3.9s forwards;
+}
+
+.intro[data-state="skip"] {
+  animation: intro-skip 0.35s ease-out forwards;
+}
+
+/* The two halves of the screen. They meet on the centre line and part at the
+   end, carrying the title up and the tagline down with them. */
+.intro__panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: calc(50% + 1px);
+  overflow: hidden;
+  will-change: transform;
+}
+
+.intro__panel--top {
+  top: 0;
+  background: radial-gradient(ellipse 70% 90% at 50% 100%, #1d1d1d 0%, #0a0a0a 55%, #050505 100%);
+  animation: intro-part-up 1.1s cubic-bezier(0.76, 0, 0.24, 1) 2.7s forwards;
+}
+
+.intro__panel--bottom {
+  bottom: 0;
+  background: radial-gradient(ellipse 70% 90% at 50% 0%, #1d1d1d 0%, #0a0a0a 55%, #050505 100%);
+  animation: intro-part-down 1.1s cubic-bezier(0.76, 0, 0.24, 1) 2.7s forwards;
+}
+
+/* Clipping masks: the text slides out from behind the centre line. */
+.intro__mask {
+  position: absolute;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.intro__mask--title {
+  bottom: clamp(1rem, 2.4vw, 1.75rem);
+}
+
+.intro__mask--tagline {
+  top: clamp(1rem, 2.4vw, 1.75rem);
+}
+
+.intro__title {
+  display: inline-block;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: clamp(1.35rem, 6vw, 4.25rem);
+  font-weight: 500;
+  line-height: 1.15;
+  text-transform: uppercase;
+  /* The negative margin cancels the trailing letter-space so the word stays
+     optically centred while the tracking drifts. */
+  letter-spacing: 0.3em;
+  margin-right: -0.3em;
+  animation:
+    intro-rise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.55s backwards,
+    intro-track-title 3.4s linear 0.4s backwards;
+}
+
+.intro__tagline {
+  display: inline-block;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: clamp(0.58rem, 1.5vw, 0.8rem);
+  line-height: 1.6;
+  text-transform: uppercase;
+  letter-spacing: 0.42em;
+  margin-right: -0.42em;
+  color: rgb(250 250 250 / 0.6);
+  animation: intro-drop 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.8s backwards;
+}
+
+.intro__line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(255 255 255 / 0.9) 18%,
+    rgb(255 255 255 / 0.9) 82%,
+    transparent
+  );
+  animation: intro-line 3.4s linear 0.15s both;
+}
+
+.intro__skip {
+  position: absolute;
+  right: 1.5rem;
+  bottom: 1.25rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: rgb(250 250 250 / 0.38);
+  animation: intro-skip-hint 2.6s ease 0.9s both;
+}
+
+/* The page behind eases into focus as the halves part. No fill-mode: until the
+   delay elapses the page is untouched (and hidden behind the panels anyway). */
+.intro[data-state="play"] ~ main {
+  animation: intro-settle 1.4s cubic-bezier(0.16, 1, 0.3, 1) 2.7s;
+}
+
+@keyframes intro-rise {
+  from {
+    transform: translateY(115%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes intro-drop {
+  from {
+    transform: translateY(-115%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes intro-track-title {
+  from {
+    letter-spacing: 0.44em;
+    margin-right: -0.44em;
+  }
+  to {
+    letter-spacing: 0.3em;
+    margin-right: -0.3em;
+  }
+}
+
+@keyframes intro-line {
+  0% {
+    transform: scaleX(0);
+    opacity: 1;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  30% {
+    transform: scaleX(0.36);
+  }
+  64% {
+    transform: scaleX(0.36);
+    animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+  }
+  80% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 0;
+  }
+}
+
+@keyframes intro-part-up {
+  to {
+    transform: translateY(-101%);
+  }
+}
+
+@keyframes intro-part-down {
+  to {
+    transform: translateY(101%);
+  }
+}
+
+@keyframes intro-skip-hint {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  25%,
+  75% {
+    opacity: 1;
+  }
+}
+
+@keyframes intro-settle {
+  from {
+    transform: scale(1.035);
+    filter: blur(10px);
+  }
+  to {
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes intro-retire {
+  to {
+    visibility: hidden;
+  }
+}
+
+@keyframes intro-skip {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}

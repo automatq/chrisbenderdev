@@ -10,6 +10,7 @@ import ProjectsSection from "@/components/section/projects-section";
 import WorkSection from "@/components/section/work-section";
 import { ArrowUpRight } from "lucide-react";
 import type { Metadata } from "next";
+import Intro from "@/components/intro/intro";
 import JsonLd from "@/components/json-ld";
 import { alternates } from "@/lib/seo";
 import {
@@ -52,6 +53,8 @@ const homepageGraph = graph([
 
 export default function Page() {
   return (
+    <>
+    <Intro title={DATA.name} tagline="Custom software · Design" />
     <main className="min-h-dvh flex flex-col gap-14 relative">
       <JsonLd graph={homepageGraph} />
       <section id="hero">
@@ -196,5 +199,6 @@ export default function Page() {
         </BlurFade>
       </section>
     </main>
+    </>
   );
 }
