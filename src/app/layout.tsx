@@ -9,7 +9,7 @@ import "./globals.css";
 import { FlickeringGrid } from "@/components/magicui/flickering-grid";
 
 const seoDescription =
-  "Chris Bender is a custom software developer and designer in Kitchener-Waterloo building high-performance websites, web and mobile applications, AI automation, and search-ready digital products.";
+  "Chris Bender is a full-stack software engineer in Kitchener-Waterloo building web applications, mobile apps and backends with TypeScript, React, Next.js, Node and Postgres. Open to full-time and contract roles.";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(DATA.url),
   applicationName: DATA.name,
   title: {
-    default: `${DATA.name} | Custom Software Developer & Designer`,
+    default: `${DATA.name} | ${DATA.role}`,
     template: `%s | ${DATA.name}`,
   },
   description: seoDescription,
@@ -35,6 +35,10 @@ export const metadata: Metadata = {
   creator: DATA.name,
   publisher: DATA.name,
   keywords: [
+    "full-stack software engineer",
+    "TypeScript engineer",
+    "React and Next.js developer",
+    "software engineer Kitchener-Waterloo",
     "custom software developer",
     "web application developer",
     "mobile app developer",
@@ -44,7 +48,7 @@ export const metadata: Metadata = {
     "answer engine optimization",
   ],
   openGraph: {
-    title: `${DATA.name} | Custom Software Developer & Designer`,
+    title: `${DATA.name} | ${DATA.role}`,
     description: seoDescription,
     url: DATA.url,
     siteName: DATA.name,
@@ -68,7 +72,7 @@ export const metadata: Metadata = {
     },
   },
   twitter: {
-    title: `${DATA.name} | Custom Software Developer & Designer`,
+    title: `${DATA.name} | ${DATA.role}`,
     description: seoDescription,
     card: "summary_large_image",
   },

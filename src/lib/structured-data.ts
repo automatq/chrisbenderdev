@@ -54,7 +54,7 @@ export function personNode(): JsonLdNode {
     url: DATA.url,
     image: absoluteUrl(DATA.avatarUrl),
     email: DATA.contact.email,
-    jobTitle: "Custom Software Developer & Designer",
+    jobTitle: DATA.role,
     description: DATA.description,
     knowsLanguage: "en",
     homeLocation: {

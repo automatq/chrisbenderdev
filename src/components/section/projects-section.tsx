@@ -14,18 +14,18 @@ export default function ProjectsSection() {
           <div className="flex w-full items-center">
             <div className="h-px flex-1 bg-linear-to-r from-transparent from-5% via-border via-95% to-transparent" />
             <div className="z-10 rounded-xl border bg-primary px-4 py-1">
-              <span className="text-sm font-medium text-background">Projects</span>
+              <span className="text-sm font-medium text-background">Client Work</span>
             </div>
             <div className="h-px flex-1 bg-linear-to-l from-transparent from-5% via-border via-95% to-transparent" />
           </div>
           <div className="flex flex-col items-center justify-center gap-y-3">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-              I like building things
+              Shipped for real businesses
             </h2>
             <p className="text-balance text-center text-muted-foreground md:text-lg/relaxed lg:text-base/relaxed xl:text-lg/relaxed">
-              I&apos;ve designed and developed websites, applications, and digital
-              experiences for businesses across a range of industries. Here&apos;s a
-              look at what I&apos;ve built.
+              Production sites and applications I scoped, designed, built and
+              still run for paying clients. Open any technical note for how
+              it&apos;s put together.
             </p>
           </div>
         </div>

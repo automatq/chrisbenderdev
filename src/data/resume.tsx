@@ -348,10 +348,14 @@ export const DATA = {
   url: "https://chrisbender.dev",
   location: "Kitchener-Waterloo, ON",
   locationLink: "https://www.google.com/maps/place/Kitchener-Waterloo,+ON",
+  // The role and availability lines drive the hero, the page titles, the
+  // contact section, the JSON-LD jobTitle and /llms.txt from one place.
+  role: "Full-Stack Software Engineer",
+  availability: "Open to full-time and contract engineering roles",
   description:
-    "I design and develop performant websites, applications, and custom software for founders, growing teams, and enterprise organizations.",
+    "Full-stack software engineer building web applications, mobile apps and the backends behind them with TypeScript, React, Next.js, Node and Postgres.",
   summary:
-    "From the first conversation to launch, you work directly with me.\n\nI'm the founder of [Automatq](https://automatq.com), based in Kitchener-Waterloo, Ontario. I partner with clients across Canada and internationally, keeping communication clear, decisions simple, and projects moving fast. Every detail is tailored to your business.",
+    "I take products from a blank repo to production: data model, API, interface, payments, deployment and the maintenance afterwards.\n\nSince 2025 I've run [Automatq](https://automatq.com), my software studio in Kitchener-Waterloo, Ontario, where I've shipped six client sites and applications and maintain several open-source products, including a multi-tenant maintenance platform and a real-time collaborative editor. I'm now looking to bring that end-to-end ownership to an engineering team, in Kitchener-Waterloo or remote.",
   avatarUrl: "/me.jpg",
   skills,
   services,
@@ -401,12 +405,12 @@ export const DATA = {
       href: "https://automatq.com",
       badges: [],
       location: "Kitchener-Waterloo, ON",
-      title: "Founder, Custom Software Development",
+      title: "Founder & Software Engineer",
       logoUrl: "/automatq.svg",
       start: "2025",
       end: "Present",
       description:
-        "Automatq is my custom software agency, building web applications, high-performance websites, and native iOS and Android products for founders, growing teams, and enterprise organizations. Every solution is designed around the client’s specific needs, built with clean, scalable code, and delivered with full ownership—no proprietary platforms, vendor lock-in, or dependency on us.",
+        "Sole engineer on every engagement, from scoping with the client through design, build, deployment and ongoing hosting. Shipped six production sites and applications on Next.js, React, Node and Postgres, with server-side form and quote pipelines, staff and admin dashboards, transactional email and file uploads. Alongside client work I build and maintain open-source products: a multi-tenant maintenance platform (NestJS, Redis, BullMQ, Terraform on AWS, plus an Expo mobile app) and a real-time collaborative editor on Yjs and ProseMirror.",
     },
   ],
   education,

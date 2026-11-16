@@ -79,7 +79,7 @@ export function GET() {
 
   const content = `# ${DATA.name}
 
-> Custom software developer and designer in ${DATA.location}, building high-performance websites, web and mobile applications, AI automation systems, and search-ready digital products. Founder of Automatq.
+> ${DATA.role} in ${DATA.location}, building web applications, mobile apps and the backends behind them. Founder of Automatq. ${DATA.availability}.
 
 Canonical site: ${DATA.url}
 Last updated: ${new Date().toISOString().slice(0, 10)}

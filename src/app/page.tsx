@@ -36,7 +36,7 @@ const homepageGraph = graph([
     "@type": "ProfilePage",
     "@id": ID.profilePage,
     url: DATA.url,
-    name: `${DATA.name} — Custom Software Developer & Designer`,
+    name: `${DATA.name} — ${DATA.role}`,
     description: DATA.description,
     inLanguage: "en-CA",
     isPartOf: { "@id": ID.website },
@@ -54,7 +54,7 @@ const homepageGraph = graph([
 export default function Page() {
   return (
     <>
-    <Intro title={DATA.name} tagline="Custom software · Design" />
+    <Intro title={DATA.name} tagline="Full-stack software engineer" />
     <main className="min-h-dvh flex flex-col gap-14 relative">
       <JsonLd graph={homepageGraph} />
       <section id="hero">
@@ -70,13 +70,25 @@ export default function Page() {
                 className="text-3xl font-semibold tracking-tighter sm:text-4xl lg:text-5xl"
                 yOffset={8}
                 text="Hi, I'm Chris"
-                srOnlyText={` Bender — custom software developer and designer in ${DATA.location}`}
+                srOnlyText={` Bender — full-stack software engineer in ${DATA.location}`}
               />
               <BlurFadeText
                 className="text-muted-foreground max-w-[600px] md:text-lg lg:text-xl"
                 delay={BLUR_FADE_DELAY}
                 text={DATA.description}
               />
+              <BlurFade delay={BLUR_FADE_DELAY * 2}>
+                <Link
+                  href="#contact"
+                  className="flex w-fit items-center gap-2 rounded-full border bg-card px-3 py-1 text-sm font-medium transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                >
+                  <span
+                    className="size-2 rounded-full bg-emerald-500"
+                    aria-hidden
+                  />
+                  {DATA.availability}
+                </Link>
+              </BlurFade>
             </div>
             <BlurFade delay={BLUR_FADE_DELAY} className="order-1 md:order-2">
               {/* next/image rather than the Radix avatar: Radix probes the file
@@ -86,7 +98,7 @@ export default function Page() {
                   preloads it instead. */}
               <Image
                 src={DATA.avatarUrl}
-                alt={`${DATA.name} — custom software developer and designer`}
+                alt={`${DATA.name} — full-stack software engineer`}
                 width={128}
                 height={128}
                 priority
@@ -181,18 +193,18 @@ export default function Page() {
           </div>
         </div>
       </section>
-      <section id="projects">
-        <BlurFade delay={BLUR_FADE_DELAY * 11}>
-          <ProjectsSection />
-        </BlurFade>
-      </section>
       {DATA.openSource.length > 0 && (
       <section id="open-source">
-        <BlurFade delay={BLUR_FADE_DELAY * 13}>
+        <BlurFade delay={BLUR_FADE_DELAY * 11}>
           <OpenSourceSection />
         </BlurFade>
       </section>
       )}
+      <section id="projects">
+        <BlurFade delay={BLUR_FADE_DELAY * 13}>
+          <ProjectsSection />
+        </BlurFade>
+      </section>
       <section id="contact">
         <BlurFade delay={BLUR_FADE_DELAY * 16}>
           <ContactSection />

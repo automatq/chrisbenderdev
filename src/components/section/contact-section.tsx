@@ -24,7 +24,8 @@ export default function ContactSection() {
           Get in Touch
         </h2>
         <p className="mx-auto max-w-lg text-muted-foreground text-balance">
-          Want to chat? Just shoot me a{" "}
+          {DATA.availability}, in {DATA.location} or remote. Recruiters and
+          hiring managers are welcome: send me a{" "}
           <Link
             href={DATA.contact.social.LinkedIn.url}
             target="_blank"
@@ -33,14 +34,14 @@ export default function ContactSection() {
           >
             DM
           </Link>{" "}
-          with a direct question or email me at{" "}
+          on LinkedIn or email me at{" "}
           <Link
             href={`mailto:${DATA.contact.email}`}
             className="text-blue-500 hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
           >
             {DATA.contact.email}
           </Link>
-          . I will ignore all soliciting.
+          .
         </p>
       </div>
     </div>
