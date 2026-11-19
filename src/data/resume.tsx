@@ -348,14 +348,14 @@ export const DATA = {
   url: "https://chrisbender.dev",
   location: "Kitchener-Waterloo, ON",
   locationLink: "https://www.google.com/maps/place/Kitchener-Waterloo,+ON",
-  // The role and availability lines drive the hero, the page titles, the
-  // contact section, the JSON-LD jobTitle and /llms.txt from one place.
-  role: "Full-Stack Software Engineer",
-  availability: "Open to full-time and contract engineering roles",
+  // The role and status lines drive the hero, the page titles, the JSON-LD
+  // jobTitle and /llms.txt from one place.
+  role: "Founder & Software Engineer",
+  status: "Taking on new projects",
   description:
-    "Full-stack software engineer building web applications, mobile apps and the backends behind them with TypeScript, React, Next.js, Node and Postgres.",
+    "Founder and software engineer. I run Automatq, a software studio, and build my own products alongside the ones I ship for clients.",
   summary:
-    "I take products from a blank repo to production: data model, API, interface, payments, deployment and the maintenance afterwards.\n\nSince 2025 I've run [Automatq](https://automatq.com), my software studio in Kitchener-Waterloo, Ontario, where I've shipped six client sites and applications and maintain several open-source products, including a multi-tenant maintenance platform and a real-time collaborative editor. I'm now looking to bring that end-to-end ownership to an engineering team, in Kitchener-Waterloo or remote.",
+    "I build software and the businesses around it.\n\nIn 2025 I founded [Automatq](https://automatq.com), a software studio in Kitchener-Waterloo, Ontario. I run every engagement myself, from the first conversation through design, build, launch and hosting, and have shipped six client sites and applications so far.\n\nAlongside the client work I build my own products in the open, including MainTek, a multi-tenant maintenance platform, and MarkedUp, a real-time collaborative workspace. I'm always up for talking with founders, potential partners and clients with a hard problem to solve.",
   avatarUrl: "/me.jpg",
   skills,
   services,
@@ -405,12 +405,12 @@ export const DATA = {
       href: "https://automatq.com",
       badges: [],
       location: "Kitchener-Waterloo, ON",
-      title: "Founder & Software Engineer",
+      title: "Founder",
       logoUrl: "/automatq.svg",
       start: "2025",
       end: "Present",
       description:
-        "Sole engineer on every engagement, from scoping with the client through design, build, deployment and ongoing hosting. Shipped six production sites and applications on Next.js, React, Node and Postgres, with server-side form and quote pipelines, staff and admin dashboards, transactional email and file uploads. Alongside client work I build and maintain open-source products: a multi-tenant maintenance platform (NestJS, Redis, BullMQ, Terraform on AWS, plus an Expo mobile app) and a real-time collaborative editor on Yjs and ProseMirror.",
+        "Founded and run the studio as its sole engineer: I scope each engagement with the client, then design, build, deploy and host it. Shipped six production sites and applications on Next.js, React, Node and Postgres, with server-side form and quote pipelines, staff and admin dashboards, transactional email and file uploads. Alongside client work I build and maintain open-source products: a multi-tenant maintenance platform (NestJS, Redis, BullMQ, Terraform on AWS, plus an Expo mobile app) and a real-time collaborative editor on Yjs and ProseMirror.",
     },
   ],
   education,

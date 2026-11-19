@@ -79,7 +79,7 @@ export function GET() {
 
   const content = `# ${DATA.name}
 
-> ${DATA.role} in ${DATA.location}, building web applications, mobile apps and the backends behind them. Founder of Automatq. ${DATA.availability}.
+> ${DATA.role} in ${DATA.location}. Runs Automatq, a software studio, and builds his own products alongside client websites, web and mobile applications. ${DATA.status}.
 
 Canonical site: ${DATA.url}
 Last updated: ${new Date().toISOString().slice(0, 10)}
@@ -95,6 +95,8 @@ ${DATA.description}
 ${services}
 
 Service area: Kitchener, Waterloo, Cambridge, Guelph and the Greater Toronto Area, plus remote clients across Canada and internationally.
+
+To start a project, use the inquiry form: ${DATA.url}/start
 
 ## Work
 

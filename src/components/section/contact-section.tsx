@@ -24,8 +24,8 @@ export default function ContactSection() {
           Get in Touch
         </h2>
         <p className="mx-auto max-w-lg text-muted-foreground text-balance">
-          {DATA.availability}, in {DATA.location} or remote. Recruiters and
-          hiring managers are welcome: send me a{" "}
+          Building something, or looking for someone to build it with? Send
+          me a{" "}
           <Link
             href={DATA.contact.social.LinkedIn.url}
             target="_blank"
@@ -40,6 +40,16 @@ export default function ContactSection() {
             className="text-blue-500 hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
           >
             {DATA.contact.email}
+          </Link>
+          .
+        </p>
+        <p className="mx-auto max-w-lg text-sm text-muted-foreground text-balance">
+          Have a website or product you want built?{" "}
+          <Link
+            href="/start"
+            className="font-medium text-foreground underline underline-offset-4 hover:no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
+          >
+            Start a project
           </Link>
           .
         </p>

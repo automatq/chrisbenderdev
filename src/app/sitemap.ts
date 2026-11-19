@@ -18,6 +18,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ...DATA.projects.map((project) => absoluteUrl(project.image)),
       ],
     },
+    {
+      url: `${DATA.url}/start`,
+      lastModified: portfolioUpdatedAt,
+      changeFrequency: "yearly",
+      priority: 0.5,
+    },
   ];
 
   if (allPosts.length > 0) {

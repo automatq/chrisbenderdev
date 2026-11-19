@@ -9,7 +9,7 @@ import "./globals.css";
 import { FlickeringGrid } from "@/components/magicui/flickering-grid";
 
 const seoDescription =
-  "Chris Bender is a full-stack software engineer in Kitchener-Waterloo building web applications, mobile apps and backends with TypeScript, React, Next.js, Node and Postgres. Open to full-time and contract roles.";
+  "Chris Bender is a founder and software engineer in Kitchener-Waterloo. He runs Automatq, a software studio, and builds his own products alongside client websites, web and mobile applications.";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -35,9 +35,9 @@ export const metadata: Metadata = {
   creator: DATA.name,
   publisher: DATA.name,
   keywords: [
-    "full-stack software engineer",
-    "TypeScript engineer",
-    "React and Next.js developer",
+    "software founder Kitchener-Waterloo",
+    "Automatq founder",
+    "software studio",
     "software engineer Kitchener-Waterloo",
     "custom software developer",
     "web application developer",
